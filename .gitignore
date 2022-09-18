@@ -1,0 +1,10 @@
+!*.py
+!*.cpp
+!*.rs
+staszicoszyfr
+target
+*.json
+main
+*.core
+.*
+!.gitignore
