@@ -1,10 +1,11 @@
 use std::io;
 
 
-fn maks_roznica(mut liczby:Vec<i32>, ilosc_liczb:usize) {
+fn maks_roznica(mut liczby:Vec<i32>, ilosc_liczb:usize) -> i32
+{
     liczby.sort();
     let roznica = liczby[ilosc_liczb - 1] - liczby[0];
-    println!("{}", roznica);
+    roznica
 }
 
 
@@ -19,5 +20,6 @@ fn main() {
         let liczba: i32 = liczba.trim().parse().unwrap();
         liczby.push(liczba);
     }
-    maks_roznica(liczby, ilosc_liczb);
+    let roznica = maks_roznica(liczby, ilosc_liczb);
+    println!("Różnica {}", roznica)
 }
