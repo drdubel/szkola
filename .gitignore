@@ -1,10 +1,10 @@
-!*.py
+*
 !*.cpp
+!*.py
 !*.rs
+!*.spl
+!*/
 staszicoszyfr
 target
-*.json
-main
-*.core
-.*
-!.gitignore
+*.old
+build
