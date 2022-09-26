@@ -6,5 +6,5 @@
 !*/
 staszicoszyfr
 target
-*.old
 build
+.vscode
