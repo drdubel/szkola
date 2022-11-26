@@ -11,9 +11,7 @@ def fib(ktora):
 
 def main():
     liczba = int(input())
-    t1 = time.time()
-    print(len(str(fib(liczba))))
-    print(time.time() - t1)
+    print(fib(liczba))
 
 
 if __name__ == "__main__":
