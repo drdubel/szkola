@@ -5,13 +5,13 @@ using namespace std;
 
 int dl_danych;
 
-int GcdOfArray(vector<int>& liczby, int idx) {
-    if (idx == dl_danych - 1) {
-        return liczby[idx];
+int nwd(vector<int>& liczby, int ktora_liczba) {
+    if (ktora_liczba == dl_danych - 1) {
+        return liczby[ktora_liczba];
     }
-    int a = liczby[idx];
-    int b = GcdOfArray(liczby, idx + 1);
-    return __gcd(a, b);
+    int liczba1 = liczby[ktora_liczba];
+    int liczba2 = nwd(liczby, ktora_liczba + 1);
+    return __gcd(liczba1, liczba2);
 }
 
 int main() {
@@ -25,5 +25,5 @@ int main() {
         cin >> liczba;
         liczby.push_back(liczba);
     }
-    cout << GcdOfArray(liczby, 0) << "\n";
+    cout << nwd(liczby, 0) << "\n";
 }
