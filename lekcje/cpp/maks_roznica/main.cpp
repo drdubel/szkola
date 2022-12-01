@@ -1,10 +1,8 @@
-#include <iostream>
 #include <algorithm>
+#include <iostream>
 using namespace std;
 
-
-int main()
-{
+int main() {
     int ilosc_liczb;
     cin >> ilosc_liczb;
     int ciag_liczb[ilosc_liczb];
@@ -12,6 +10,6 @@ int main()
         cin >> ciag_liczb[i];
     }
     sort(ciag_liczb, ciag_liczb + ilosc_liczb);
-    int roznica = ciag_liczb[ilosc_liczb-1] - ciag_liczb[0];
+    int roznica = ciag_liczb[ilosc_liczb - 1] - ciag_liczb[0];
     cout << roznica << endl;
 }

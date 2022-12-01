@@ -1,6 +1,6 @@
 def slowoszukacz(tekst, dl_tekstu):
     for litera, odw_litera in zip(tekst, reversed(tekst)):
-        if 
+        if
 
 
 def main():

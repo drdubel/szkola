@@ -2,21 +2,18 @@
 
 using namespace std;
 
-
 long long szybkie_potegowanie(long long liczba, long long wykladnik) {
     if (wykladnik == 0) {
         return 1;
     }
-    if (wykladnik%2 == 0) {
+    if (wykladnik % 2 == 0) {
         long long wynik = szybkie_potegowanie(liczba, wykladnik / 2);
         return (wynik * wynik) % 1000000007;
-    }
-    else {
+    } else {
         long long wynik = szybkie_potegowanie(liczba, wykladnik - 1);
         return (wynik * liczba) % 1000000007;
     }
 }
-
 
 int main() {
     ios_base::sync_with_stdio(0);

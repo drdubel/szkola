@@ -1,7 +1,6 @@
 #include <iostream>
 using namespace std;
 
-
 int main() {
     int il_zwierzat;
     cin >> il_zwierzat;

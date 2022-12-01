@@ -1,7 +1,6 @@
 #include <iostream>
 using namespace std;
 
-
 int main() {
     int zakres_p, zakres_k;
     cin >> zakres_p >> zakres_k;

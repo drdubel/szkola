@@ -7,7 +7,8 @@ def cukiernia(il_przed, maks_suma_wag, waga, wartosc):
         for j in range(1, maks_suma_wag + 1):
             if waga[p] <= j:
                 tablica_wynikow[i][j] = max(
-                    wartosc[p] + tablica_wynikow[p][j - waga[p]], tablica_wynikow[p][j]
+                    wartosc[p] + tablica_wynikow[p][j -
+                                                    waga[p]], tablica_wynikow[p][j]
                 )
             else:
                 tablica_wynikow[i][j] = tablica_wynikow[p][j]

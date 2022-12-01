@@ -1,7 +1,6 @@
 #include <iostream>
 using namespace std;
 
-
 int main() {
     int il_liczb, ulubione_liczby = 0, i;
     string liczba;

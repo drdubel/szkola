@@ -2,38 +2,29 @@
 
 using namespace std;
 
-int maxOverlap(string S, string T)
-{
+int maxOverlap(string S, string T) {
     string str = T;
     int count[T.length()] = {0};
     int overlap = 0;
     int max_overlap = 0;
 
-    for (int i = 0; i <= S.length(); i++)
-    {
-
+    for (int i = 0; i <= S.length(); i++) {
         int index = str.find(S[i]);
 
-        if (index == 0)
-        {
+        if (index == 0) {
             overlap++;
 
-            if (overlap >= 2)
-                max_overlap = max(overlap, max_overlap);
+            if (overlap >= 2) max_overlap = max(overlap, max_overlap);
 
             count[index]++;
-        }
-        else
-        {
-            if (count[index - 1] <= 0)
-                return -1;
+        } else {
+            if (count[index - 1] <= 0) return -1;
 
             count[index]++;
             count[index - 1]--;
         }
 
-        if (index == 4)
-            overlap--;
+        if (index == 4) overlap--;
     }
 
     if (overlap == 0)
@@ -42,8 +33,7 @@ int maxOverlap(string S, string T)
         return -1;
 }
 
-int main()
-{
+int main() {
     string S;
     string T;
     cin >> T >> S;
