@@ -16,27 +16,33 @@ int main() {
     cin >> il_polecen;
     for (long long i = 0; i < il_polecen; i++) {
         cin >> operacja;
-        if (operacja == '+') {
-            cin >> liczba;
-            zbior.insert(liczba);
-        } else if (operacja == '-') {
-            cin >> liczba;
-            zbior.erase(liczba);
-        } else if (operacja == 'f') {
-            cin >> liczba;
-            auto wieksza = zbior.upper_bound(liczba);
-            if (*wieksza) {
-                cout << *wieksza << "\n";
-            } else {
-                cout << "BRAK\n";
-            }
-        } else if (operacja == 's') {
-            cout << zbior.size() << "\n";
-        } else if (operacja == 'w') {
-            for (auto element : zbior) {
-                cout << element << ' ';
-            }
-            cout << "\n";
+        switch (operacja) {
+            case '+':
+                cin >> liczba;
+                zbior.insert(liczba);
+                break;
+            case '-':
+                cin >> liczba;
+                zbior.erase(liczba);
+                break;
+            case 'f':
+                cin >> liczba;
+                auto wieksza = zbior.upper_bound(liczba);
+                if (*wieksza) {
+                    cout << *wieksza << "\n";
+                } else {
+                    cout << "BRAK\n";
+                }
+                break;
+            case 's':
+                cout << zbior.size() << "\n";
+                break;
+            case 'w':
+                for (auto element : zbior) {
+                    cout << element << ' ';
+                }
+                cout << "\n";
+                break;
         }
     }
 }
