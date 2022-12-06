@@ -3,6 +3,7 @@
 !*.py
 !*.rs
 !*.spl
+!*.clj
 !*/
 staszicoszyfr
 target
