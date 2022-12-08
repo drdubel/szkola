@@ -4,6 +4,7 @@
 !*.rs
 !*.spl
 !*.clj
+!*.toml
 !*/
 staszicoszyfr
 target
