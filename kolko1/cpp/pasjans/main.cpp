@@ -1,33 +1,33 @@
 #include <iostream>
+#include <map>
 #include <vector>
 
 using namespace std;
 
 int main() {
-    ios_base::sync_with_stdio(0);
-    cin.tie(0);
-    cout.tie(0);
-    int il_kart, karta, operacja, i, j;
-    vector<int> stosy;
-    string wyjscie = "\n";
-    cin >> il_kart;
-    for (i = 0; i < il_kart; i++) {
+    map<int, int> karty;
+    vector<int> wyjscie;
+    int n;
+    cin >> n;
+    int i, karta, a, b, nr = 1;
+    for (i = 0; i < n; ++i) {
         cin >> karta;
-        operacja = 1;
-        j = 0;
-        for (int &stos : stosy) {
-            j++;
-            if (stos > karta) {
-                stos = karta;
-                operacja = 2;
-                wyjscie += "2 " + to_string(j) + "\n";
-                break;
-            }
-        }
-        if (operacja == 1) {
-            stosy.push_back(karta);
-            wyjscie += "1\n";
+        auto znal = karty.upper_bound(karta);
+        if (znal == karty.end()) {
+            wyjscie.push_back(-1);
+            karty[karta] = nr++;
+        } else {
+            b = (*znal).second;
+            karty.erase(znal);
+            karty[karta] = b;
+            wyjscie.push_back(b);
         }
     }
-    cout << stosy.size() << wyjscie;
+    cout << nr - 1 << '\n';
+    for (i = 0; i < (int)wyjscie.size(); ++i) {
+        if (wyjscie[i] == -1)
+            cout << 1 << '\n';
+        else
+            cout << 2 << ' ' << wyjscie[i] << '\n';
+    }
 }
