@@ -26,7 +26,7 @@ int main() {
             }
         } else {
             if (konta.find(pesel) == konta.end()) {
-                konta.insert(pair<long, int>(pesel, kwota));
+                konta[pesel] = kwota;
             } else {
                 konta[pesel] += kwota;
             }
