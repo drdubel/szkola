@@ -4,24 +4,24 @@
 
 using namespace std;
 
-long long a, c, p, akt;
-int i;
+long long a, c, p;
+int i, an, akt;
 
 int logarytm() {
     a %= p, c %= p;
     int n = sqrt(p) + 1;
 
-    long long an = 1;
-    for (i = 0; i < n; ++i) an = (an * a) % p;
+    an = 1;
+    for (i = 0; i < n; ++i) an = (an * 1ll * a) % p;
 
     unordered_map<int, int> wartosci;
     for (i = 0, akt = c; i <= n; ++i) {
         wartosci[akt] = i;
-        akt = (akt * a) % p;
+        akt = (akt * 1ll * a) % p;
     }
 
     for (i = 1, akt = 1; i <= n; ++i) {
-        akt = (akt * an) % p;
+        akt = (akt * 1ll * an) % p;
         if (wartosci[akt]) {
             int ans = n * i - wartosci[akt];
             return ans;
