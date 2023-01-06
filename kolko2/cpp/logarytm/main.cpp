@@ -5,7 +5,7 @@
 using namespace std;
 
 long long a, c, p;
-int i, an, akt;
+int i, an, n, akt;
 
 int logarytm() {
     a %= p, c %= p;
@@ -22,7 +22,7 @@ int logarytm() {
 
     for (i = 1, akt = 1; i <= n; ++i) {
         akt = (akt * 1ll * an) % p;
-        if (wartosci[akt]) {
+        if (wartosci.count(akt)) {
             int ans = n * i - wartosci[akt];
             return ans;
         }
