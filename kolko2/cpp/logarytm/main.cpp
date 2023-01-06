@@ -22,7 +22,7 @@ int logarytm() {
 
     for (i = 1, akt = 1; i <= n; ++i) {
         akt = (akt * an) % p;
-        if (wartosci.count(akt)) {
+        if (wartosci[akt]) {
             int ans = n * i - wartosci[akt];
             return ans;
         }
