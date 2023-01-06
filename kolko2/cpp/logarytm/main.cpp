@@ -21,7 +21,7 @@ int logarytm() {
 
     for (i = 1, akt = 1; i <= n; ++i) {
         akt = (akt * 1ll * an) % p;
-        if (wartosci.count(akt)) {
+        if (wartosci.find(akt) != wartosci.end()) {
             int ans = n * i - wartosci[akt];
             return ans;
         }
