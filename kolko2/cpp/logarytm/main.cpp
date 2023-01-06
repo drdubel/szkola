@@ -8,7 +8,7 @@ int a, c, p, i, an, n, akt;
 
 int logarytm() {
     a %= p, c %= p;
-    int n = sqrt(p) + 1;
+    n = sqrt(p) + 1;
 
     an = 1;
     for (i = 0; i < n; ++i) an = (an * 1ll * a) % p;
