@@ -4,8 +4,7 @@
 
 using namespace std;
 
-long long a, c, p;
-int i, an, n, akt;
+int a, c, p, i, an, n, akt;
 
 int logarytm() {
     a %= p, c %= p;
