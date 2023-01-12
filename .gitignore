@@ -6,8 +6,8 @@
 !*.clj
 !*.toml
 !*/
-staszicoszyfr
 target
 build
 .vscode
 testy
+_*
