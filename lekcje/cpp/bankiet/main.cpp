@@ -1,27 +1,28 @@
 #include <iostream>
 #include <vector>
+
 using namespace std;
+
+int il_stolikow = 0, il_gosci, gosc, i;
 
 int main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
-    cout.tie(0);
-    int n;
-    cin >> n;
-    vector<int> goscie(n);
-    for (int i = 0; i < n; i++) {
-        cin >> goscie[i];
+    cin >> il_gosci;
+    vector<int> rozmieszczenie(il_gosci + 1);
+    vector<bool> czy_odwiedzeni(il_gosci + 1, false);
+    for (i = 0; i < il_gosci; ++i) {
+        cin >> rozmieszczenie[i + 1];
     }
-    vector<bool> odwiedzeni(n, false);
-    int stolików = 0;
-    for (int i = 0; i < n; i++) {
-        if (odwiedzeni[i]) continue;
-        stolików++;
-        int gosc = goscie[i];
-        while (!odwiedzeni[gosc - 1]) {
-            odwiedzeni[gosc - 1] = true;
-            gosc = goscie[gosc - 1];
+    for (i = 1; i < il_gosci + 1; ++i) {
+        if (!czy_odwiedzeni[i]) {
+            il_stolikow++;
+            gosc = rozmieszczenie[i];
+            while (!czy_odwiedzeni[gosc]) {
+                czy_odwiedzeni[gosc] = true;
+                gosc = rozmieszczenie[gosc];
+            }
         }
     }
-    cout << stolików << "\n";
+    cout << il_stolikow << "\n";
 }
