@@ -2,22 +2,19 @@
 
 using namespace std;
 
-constexpr int maxn = 1000007;
-int ojc[maxn];
+const unsigned int MAXN = 1e6 + 7;
 
-int Find(int v) {
-    if (v == ojc[v])
-        return v;
-    else {
-        ojc[v] = Find(ojc[v]);
-        return ojc[v];
-    }
+int rodzic[MAXN], ranga[MAXN], a, b;
+
+int Find(int x) {
+    if (rodzic[x] != x) rodzic[x] = Find(rodzic[x]);
+    return rodzic[x];
 }
 
-void Union(int a, int b) {
-    Find(a);
-    Find(b);
-    ojc[ojc[a]] = ojc[b];
-}
-
-int main() {}
+void Union(int x, int y) {
+    a = Find(x);
+    b = Find(y);
+    if (ranga[a] < ranga[b])
+        rodzic[a] = b;
+    else
+        rodzic[b] = a;
