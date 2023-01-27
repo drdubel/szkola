@@ -1,45 +1,40 @@
-#include <algorithm>
 #include <iostream>
-#include <string>
+
 using namespace std;
 
-string dodawanie(string liczba1, string liczba2, int dl_liczb) {
-    int suma;
-    int przeniesione = 0;
-    string wynik = "";
-    for (int i = dl_liczb - 1; i >= 0; i--) {
-        suma = przeniesione + (int)(liczba1[i] - '0') + (int)(liczba2[i] - '0');
-        wynik += '0' + (char)(suma % 10);
-        przeniesione = suma / 10;
-    }
-    if (suma / 10 != 0) {
-        wynik += '0' + (char)(suma / 10);
-    }
-    reverse(wynik.begin(), wynik.end());
-    return wynik;
-}
+const int MOD = 1e9 + 7;
+long long res[2], n, a, b, c, d;
 
-string fib(int ktora) {
-    string liczba1 = "1";
-    string liczba2 = "1";
-    string wynik;
-    for (int i = 2; i <= ktora; i++) {
-        int dl_liczb = max(liczba1.size(), liczba2.size());
-        if (dl_liczb > liczba1.size()) {
-            reverse(liczba1.begin(), liczba1.end());
-            liczba1 += "0";
-            reverse(liczba1.begin(), liczba1.end());
-        }
-        wynik = dodawanie(liczba1, liczba2, dl_liczb);
-        liczba1 = liczba2;
-        liczba2 = wynik;
+void FastDoubling(long long n, long long res[]) {
+    if (n == 0) {
+        res[0] = 0;
+        res[1] = 1;
+        return;
     }
-    return liczba2;
+    FastDoubling((n / 2), res);
+    a = res[0];
+    b = res[1];
+
+    c = 2 * b - a;
+
+    if (c < 0) c += MOD;
+    c = (a * c) % MOD;
+    d = (a * a + b * b) % MOD;
+    if (n % 2 == 0) {
+        res[0] = c;
+        res[1] = d;
+    } else {
+        res[0] = d;
+        res[1] = c + d;
+    }
 }
 
 int main() {
-    int ktora;
-    cin >> ktora;
-    cout << fib(ktora) + "\n";
-    return 0;
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cin >> n;
+
+    FastDoubling(n, res);
+
+    cout << res[0] << "\n";
 }
