@@ -3,41 +3,36 @@
 using namespace std;
 
 const int MAXN = 2e4 + 7;
-int tarasy[MAXN], odl[MAXN], odw_odl[MAXN], il_tarasow, il_kredytow, wyn, pocz,
-    koszt, kon, i;
+int tarasy[MAXN], il_tarasow, il_kredytow, wyn, pocz, koszt, kon, i;
+
+int rozwiaz() {
+    int wynik = 0;
+    int kon = 0;
+    int koszt = 0;
+    for (int pocz = 0; pocz < il_tarasow; pocz++) {
+        while (kon < pocz && koszt > il_kredytow) {
+            koszt -= max(0, tarasy[kon + 1] - tarasy[kon]);
+            kon++;
+        }
+        if (koszt <= il_kredytow) {
+            wynik = max(pocz - kon + 1, wynik);
+        }
+        koszt += max(0, tarasy[pocz + 1] - tarasy[pocz]);
+    }
+    return wynik;
+}
 
 int main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cin >> il_tarasow >> il_kredytow;
-    cin >> tarasy[0];
-    odl[0] = tarasy[0];
-    for (i = 1; i < il_tarasow; ++i) {
+    for (int i = 0; i < il_tarasow; i++) {
         cin >> tarasy[i];
-        odl[i] = max(tarasy[i - 1] - tarasy[i], 0);
     }
-    for (i = il_tarasow - 1; i > 0; --i) {
-        odw_odl[i] = max(tarasy[i - 1] - tarasy[i], 0);
+    wyn = rozwiaz();
+
+    for (int i = 0; i < il_tarasow / 2; i++) {
+        swap(tarasy[i], tarasy[il_tarasow - i - 1]);
     }
-    while (pocz < il_tarasow) {
-        while ((koszt <= il_kredytow) && (kon < il_tarasow - 1)) {
-            ++kon;
-            koszt += odl[kon];
-        }
-        ++pocz;
-        koszt -= odl[pocz];
-        wyn = max(kon - pocz + 1, wyn);
-    }
-    pocz = il_tarasow - 1;
-    kon = il_tarasow - 1;
-    while (pocz > 0) {
-        while ((koszt <= il_kredytow) && (kon > 0)) {
-            --kon;
-            koszt += odw_odl[kon];
-        }
-        --pocz;
-        koszt -= odw_odl[pocz];
-        wyn = max(pocz - kon + 1, wyn);
-    }
-    cout << wyn << "\n";
+    cout << max(wyn, rozwiaz());
 }
