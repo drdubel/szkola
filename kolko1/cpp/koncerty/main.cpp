@@ -1,27 +1,22 @@
+#include <algorithm>
 #include <iostream>
 
 using namespace std;
-long long maxSum(int arr[], int il_kocertow, int il_planowanych_koncertow) {
-    long long wynik = 0;
-    for (int i = 0; i < il_planowanych_koncertow; i++) wynik += arr[i];
-    long long akt_wynik = wynik;
-    for (int i = il_planowanych_koncertow; i < il_kocertow; i++) {
-        akt_wynik += arr[i] - arr[i - il_planowanych_koncertow];
-        wynik = max(wynik, akt_wynik);
-    }
 
-    return wynik;
-}
+const int MAXN = 1e5 + 7;
+long long koncerty[MAXN], il_koncertow, il_planowanych_koncertow,
+    wyn = 1e12 + 7, i;
+
 int main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
-    cout.tie(0);
-    int il_koncertow, il_planowanych_koncertow;
     cin >> il_koncertow >> il_planowanych_koncertow;
-    int koncerty[il_koncertow];
-    for (auto &koncert : koncerty) {
-        cin >> koncert;
-        koncert *= -1;
+    for (i = 1; i <= il_koncertow; ++i) {
+        cin >> koncerty[i];
+        koncerty[i] += koncerty[i - 1];
     }
-    cout << -maxSum(koncerty, il_koncertow, il_planowanych_koncertow) << "\n";
+    for (i = il_planowanych_koncertow; i <= il_koncertow; ++i) {
+        wyn = min(koncerty[i] - koncerty[i - il_planowanych_koncertow], wyn);
+    }
+    cout << wyn << "\n";
 }
