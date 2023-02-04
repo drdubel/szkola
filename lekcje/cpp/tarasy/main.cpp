@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <iostream>
 
 using namespace std;
@@ -30,9 +31,6 @@ int main() {
         cin >> tarasy[i];
     }
     wyn = rozwiaz();
-
-    for (int i = 0; i < il_tarasow / 2; i++) {
-        swap(tarasy[i], tarasy[il_tarasow - i - 1]);
-    }
+    reverse(tarasy, tarasy + il_tarasow);
     cout << max(wyn, rozwiaz());
 }

@@ -3,53 +3,34 @@
 
 using namespace std;
 
-constexpr short maxn = 20007;
-short in[maxn]{};
-short k, n;
+const int MAXN = 2e4 + 7;
+int tarasy[MAXN], il_tarasow, il_kredytow, wyn, pocz, koszt, kon, i;
 
-bool czydasie(short nn) {
-    if (nn > n) return 0;
-    short i;
-    if (nn == 1) return 1;
-    int c = max(in[1] - in[0], 0);
-    for (i = 2; i < nn; ++i) {
-        c += max(in[i] - in[i - 1], 0);
+int rozwiaz() {
+    int wynik = 0;
+    int kon = 0;
+    int koszt = 0;
+    for (int pocz = 0; pocz < il_tarasow; pocz++) {
+        while (kon < pocz && koszt > il_kredytow) {
+            koszt -= max(0, tarasy[kon + 1] - tarasy[kon]);
+            kon++;
+        }
+        if (koszt <= il_kredytow) {
+            wynik = max(pocz - kon + 1, wynik);
+        }
+        koszt += max(0, tarasy[pocz + 1] - tarasy[pocz]);
     }
-    if (c <= k) return 1;
-    short ogon = 1, glowa;
-    for (glowa = nn; glowa < n; ++glowa) {
-        c -= max(in[ogon] - in[ogon - 1], 0);
-        c += max(in[glowa] - in[glowa - 1], 0);
-        if (c <= k) return 1;
-        ++ogon;
-    }
-    return 0;
+    return wynik;
 }
 
 int main() {
-    short i;
-    cin >> n >> k;
-    for (i = 0; i < n; ++i) {
-        cin >> in[i];
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cin >> il_tarasow >> il_kredytow;
+    for (int i = 0; i < il_tarasow; i++) {
+        cin >> tarasy[i];
     }
-    short b = 0, e = n + 1, m;
-    while (b < e) {
-        m = (b + e) / 2;
-        if (czydasie(m))
-            b = m + 1;
-        else
-            e = m;
-    }
-    short out = b - 1;
-    reverse(in, in + n);
-    b = 0, e = n + 1;
-    while (b < e) {
-        m = (b + e) / 2;
-        if (czydasie(m))
-            b = m + 1;
-        else
-            e = m;
-    }
-    out = max((short)out, (short)(b - 1));
-    cout << out;
+    wyn = rozwiaz();
+    reverse(tarasy, tarasy + il_tarasow);
+    cout << max(wyn, rozwiaz());
 }
