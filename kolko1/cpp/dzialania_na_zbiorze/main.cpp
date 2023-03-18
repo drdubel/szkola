@@ -3,6 +3,7 @@
 #include <set>
 
 using namespace std;
+
 int main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
@@ -30,7 +31,7 @@ int main() {
         } else if (operacja == 's') {
             cout << zbior.size() << "\n";
         } else if (operacja == 'w') {
-            for (auto element : zbior) {
+            for (auto element: zbior) {
                 cout << element << ' ';
             }
             cout << "\n";
