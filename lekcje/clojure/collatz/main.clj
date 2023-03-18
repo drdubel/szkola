@@ -1,8 +1,11 @@
 (defn main []
-  (def liczba_pocz (Integer/parseInt (read-line)))
-  (while (> liczba_pocz 1)
-    (if (= (mod liczba_pocz 2) 0)
-      (def liczba_pocz (/ liczba_pocz 2)) (def liczba_pocz (+ (* liczba_pocz 3) 1)))
-    (print liczba_pocz "")))
+      (loop [value (Integer/parseInt (read-line))]
+            (when (> value 1)
+                  (print value "")
+                  (recur
+                    (if (= (mod value 2) 0)
+                      (/ value 2)
+                      (+ (* value 3) 1)))))
+      (println ""))
 
 (main)
