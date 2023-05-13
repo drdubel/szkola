@@ -1,11 +1,11 @@
-#include <iostream>
 #include <cmath>
+#include <iostream>
 
 typedef long long ll;
 
 using namespace std;
 
-const ll MAXN = 1e6 + 7;
+const ll MAXN = 1e7 + 7;
 ll n, a, b;
 ll wynik;
 
@@ -13,7 +13,7 @@ ll pot(ll x, ll n) {
     x %= MAXN;
     if (n == 0) return 1;
     if (n % 2 == 0)
-        return (ll) pow(pot(x, n / 2) % MAXN, 2) % MAXN;
+        return (ll)pow(pot(x, n / 2) % MAXN, 2) % MAXN;
     else
         return (pot(x, n - 1) % MAXN * x) % MAXN;
 }
