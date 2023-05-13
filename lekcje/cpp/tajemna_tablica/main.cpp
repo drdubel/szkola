@@ -3,7 +3,7 @@
 #include "tajtabbibl.h"
 
 using namespace std;
-const int MINN = 1e9, MAXX = -1e9, MINI, MAXI;
+int MINN = 1e9, MAXX = -1e9, MINI, MAXI;
 
 void odp(int i) {
     int a = -1e9 - 7, e = 1e9 + 7, m;
