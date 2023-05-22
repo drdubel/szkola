@@ -48,7 +48,6 @@ string dodawanie(string liczba1, string liczba2) {
 string odejmowanie(string liczba1, string liczba2) {
     bool ujemny = false;
 
-    // Sprawdź czy wynik będzie ujemny
     if (czy_mniejsze(liczba1, liczba2)) {
         swap(liczba1, liczba2);
         ujemny = true;
@@ -122,10 +121,23 @@ int main() {
     wynik2 = dodaj(liczba1, liczba2);
     if (wynik1 == wynik2) {
         cout << "ROWNE\n";
-    }
-    if (czy_mniejsze(wynik1, wynik2)) {
+    } else if ((wynik1[0] == '-') && (wynik2[0] != '-')) {
         cout << "MNIEJSZE\n";
-    } else {
+    } else if ((wynik1[0] != '-') && (wynik2[0] == '-')) {
         cout << "WIEKSZE\n";
+    } else if ((wynik1[0] == '-') && (wynik2[0] == '-')) {
+        wynik1.erase(0, 1);
+        wynik2.erase(0, 1);
+        if (czy_mniejsze(wynik1, wynik2)) {
+            cout << "WIEKSZE\n";
+        } else {
+            cout << "MNIEJSZE\n";
+        }
+    } else {
+        if (czy_mniejsze(wynik1, wynik2)) {
+            cout << "MNIEJSZE\n";
+        } else {
+            cout << "WIEKSZE\n";
+        }
     }
 }
