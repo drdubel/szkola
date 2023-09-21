@@ -6,6 +6,7 @@
 !*.clj
 !*.toml
 !*/
+wiezaw
 target
 build
 .vscode
