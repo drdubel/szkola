@@ -30,7 +30,10 @@ int main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     n = wezN();
-    for (int i = 1; i <= n; ++i) {
+    vector<int> kolejnosc(n);
+    for (int i = 0; i < n; ++i) kolejnosc[i] = i + 1;
+    random_shuffle(kolejnosc.begin(), kolejnosc.end());
+    for (int i : kolejnosc) {
         if (zamowienie(i, najw + 1)) {
             binsearch(i);
         }
