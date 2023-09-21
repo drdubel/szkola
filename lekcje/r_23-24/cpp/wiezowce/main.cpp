@@ -2,7 +2,7 @@
 
 using namespace std;
 
-const long long MAXN = 1e18;
+const long long MAXN = 1e18 + 7;
 long long najw = 1, sro, l, r;
 int n;
 
@@ -10,7 +10,6 @@ void binsearch(int i) {
     l = najw;
     r = MAXN;
     while (l + 1 < r) {
-        // cout << sro << ' ' << l << ' ' << r << "\n";
         sro = l + (r - l) / 2 + (r - l) % 2;
         if (zamowienie(i, sro)) {
             l = sro;
@@ -18,9 +17,8 @@ void binsearch(int i) {
             r = sro;
         }
     }
-    // cout << sro << ' ' << l << ' ' << r << "\n";
     if (l == 1e18 - 1) {
-        najw = 1e18;
+        if (zamowienie(i, 1e18)) najw = 1e18;
         return;
     }
     najw = max(l, najw);
