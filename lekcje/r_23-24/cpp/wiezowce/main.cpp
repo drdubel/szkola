@@ -3,25 +3,26 @@
 using namespace std;
 
 const long long MAXN = 1e18 + 7;
-long long najw = 1, sro, l, r;
+long long najw = 1, najwi = 1, sro;
 int n;
 
 void binsearch(int i) {
-    l = najw;
-    r = MAXN;
-    while (l + 1 < r) {
-        sro = l + (r - l) / 2 + (r - l) % 2;
+    long long l = najw, r = MAXN;
+    while (l < r) {
+        sro = (l + r) / 2;
         if (zamowienie(i, sro)) {
-            l = sro;
+            l = sro + 1;
         } else {
             r = sro;
         }
     }
-    if (l == 1e18 - 1) {
-        if (zamowienie(i, 1e18)) najw = 1e18;
-        return;
+    if (l > najw) {
+        if (zamowienie(i, 1e18)) {
+            odpowiedz(1e18);
+        }
+        najw = l - 1;
+        najwi = i;
     }
-    najw = max(l, najw);
 }
 
 int main() {
