@@ -1,15 +1,15 @@
 MOD = 123456789
 
 
-def fastDoubling(n, res):
+def szypszyppot(n, wyn):
     if n == 0:
-        res[0] = 0
-        res[1] = 1
+        wyn[0] = 0
+        wyn[1] = 1
         return
 
-    fastDoubling((n // 2), res)
-    a = res[0]
-    b = res[1]
+    szypszyppot((n // 2), wyn)
+    a = wyn[0]
+    b = wyn[1]
 
     c = 2 * b - a
 
@@ -18,17 +18,17 @@ def fastDoubling(n, res):
     c = (a * c) % MOD
     d = (a * a + b * b) % MOD
     if n % 2 == 0:
-        res[0] = c
-        res[1] = d
+        wyn[0] = c
+        wyn[1] = d
     else:
-        res[0] = d
-        res[1] = c + d
+        wyn[0] = d
+        wyn[1] = c + d
 
 
 def main():
-    res = [0] * 2
-    fastDoubling(int(input()), res)
-    print(res[0])
+    wyn = [0] * 2
+    szypszyppot(int(input()), wyn)
+    print(wyn[0])
 
 
 if __name__ == "__main__":
