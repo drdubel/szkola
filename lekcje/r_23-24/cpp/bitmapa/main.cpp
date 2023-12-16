@@ -3,44 +3,93 @@
 
 using namespace std;
 
-int n, m;
+vector<vector<int>> licz_odleglosci(vector<vector<int>> bitmapa,
+                                    vector<vector<int>> odleglosci, int n,
+                                    int m) {
+    int akt_odl;
 
-void licz_odleglosci(vector<int>* bitmapa, vector<int>* odleglosci,
-                     int odl_od_jedynki, int i, int j, int mod1, int mod2) {
-    if (bitmapa[i][j] == 1)
-        odl_od_jedynki = 0;
-    else
-        ++odl_od_jedynki;
-    odleglosci[i][j] = min(odl_od_jedynki, odleglosci[i][j]);
-
-    if (i + mod1 < n && i + mod1 >= 0)
-        licz_odleglosci(bitmapa, odleglosci, odl_od_jedynki, i + mod1, j, mod1,
-                        mod2);
-    if (j + mod2 < m && j + mod2 >= 0)
-        licz_odleglosci(bitmapa, odleglosci, odl_od_jedynki, i, j + mod2, mod1,
-                        mod2);
-}
-
-int main() {
-    ios_base::sync_with_stdio(0);
-    cin.tie(0);
-
-    cin >> n >> m;
-    string line;
-    vector<int> bitmapa[n];
-    vector<int> odleglosci[n];
     for (int i = 0; i < n; ++i) {
-        cin >> line;
-        for (char digit : line) {
-            odleglosci[i].push_back(182 * 182);
-            bitmapa[i].push_back(digit - '0');
+        akt_odl = 182 * 182;
+        for (int j = 0; j < m; ++j) {
+            if (bitmapa[i][j] == 1) {
+                odleglosci[i][j] = 0;
+                akt_odl = 1;
+                continue;
+            }
+
+            akt_odl = min(akt_odl, odleglosci[i][j]);
+            odleglosci[i][j] = akt_odl;
+
+            ++akt_odl;
         }
     }
 
-    licz_odleglosci(bitmapa, odleglosci, 182 * 182, 0, 0, 1, 1);
-    licz_odleglosci(bitmapa, odleglosci, 182 * 182, n - 1, 0, -1, 1);
-    licz_odleglosci(bitmapa, odleglosci, 182 * 182, 0, m - 1, 1, -1);
-    licz_odleglosci(bitmapa, odleglosci, 182 * 182, n - 1, m - 1, -1, -1);
+    for (int i = 0; i < n; ++i) {
+        akt_odl = 182 * 182;
+        for (int j = m - 1; j >= 0; --j) {
+            if (bitmapa[i][j] == 1) {
+                odleglosci[i][j] = 0;
+                akt_odl = 1;
+                continue;
+            }
+
+            akt_odl = min(akt_odl, odleglosci[i][j]);
+            odleglosci[i][j] = akt_odl;
+
+            ++akt_odl;
+        }
+    }
+
+    for (int j = 0; j < m; ++j) {
+        akt_odl = 182 * 182;
+        for (int i = 0; i < n; ++i) {
+            if (bitmapa[i][j] == 1) {
+                odleglosci[i][j] = 0;
+                akt_odl = 1;
+                continue;
+            }
+
+            akt_odl = min(akt_odl, odleglosci[i][j]);
+            odleglosci[i][j] = akt_odl;
+
+            ++akt_odl;
+        }
+    }
+
+    for (int j = 0; j < m; ++j) {
+        akt_odl = 182 * 182;
+        for (int i = n - 1; i >= 0; --i) {
+            if (bitmapa[i][j] == 1) {
+                odleglosci[i][j] = 0;
+                akt_odl = 1;
+                continue;
+            }
+
+            akt_odl = min(akt_odl, odleglosci[i][j]);
+            odleglosci[i][j] = akt_odl;
+
+            ++akt_odl;
+        }
+    }
+
+    return odleglosci;
+}
+
+int main() {
+    int n, m;
+    cin >> n >> m;
+    string line;
+    vector<vector<int>> bitmapa(n, vector<int>(m, 0));
+    vector<vector<int>> odleglosci(n, vector<int>(m, 182 * 182));
+
+    for (int i = 0; i < n; ++i) {
+        cin >> line;
+        for (int j = 0; j < m; ++j) {
+            bitmapa[i][j] = (int)(line[j] - '0');
+        }
+    }
+
+    odleglosci = licz_odleglosci(bitmapa, odleglosci, n, m);
 
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < m; ++j) {
