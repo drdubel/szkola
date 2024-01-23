@@ -8,6 +8,7 @@ int wysokosci[MAXN], szerokosc_platformy, szerokosc_klocka, poczatek_klocka,
 
 int main() {
     cin >> szerokosc_platformy >> il_klockow;
+
     for (i = 0; i < szerokosc_platformy; ++i) {
         cin >> szerokosc_klocka >> poczatek_klocka;
     }
