@@ -1,29 +1,28 @@
 from sys import stdin
 
 
-def rozdystrybuuj_drewno(drewno):
-    list1 = []
-    list2 = []
-    suma1 = 0
-    suma2 = 0
+def knapsack(capacity, items, n):
+    dp = [0 for _ in range(capacity + 1)]
 
-    for pieniek in drewno:
-        if suma1 <= suma2:
-            list1.append(pieniek)
-            suma1 += pieniek
-        else:
-            list2.append(pieniek)
-            suma2 += pieniek
+    for i in range(1, n + 1):
+        for w in range(capacity, 0, -1):
+            if items[i - 1] <= w:
+                dp[w] = max(dp[w], dp[w - items[i - 1]] + items[i - 1])
 
-    return suma1, suma2
+    return dp[capacity]
 
 
 def main():
     n = int(stdin.readline().strip())
-    drewno = sorted(map(int, stdin.readline().split()))
-    najdluzszy_pieniek = drewno.pop()
-    bajtek, bitek = rozdystrybuuj_drewno(drewno[::-1])
-    print(min(bajtek, bitek) + najdluzszy_pieniek)
+    items = sorted(map(int, stdin.readline().strip().split()))
+
+    biggest = items.pop()
+    total_sum = sum(items)
+    capacity = total_sum // 2
+    can_fit = knapsack(capacity, items, n - 1)
+    time = can_fit + biggest
+
+    print(time)
 
 
 if __name__ == "__main__":
