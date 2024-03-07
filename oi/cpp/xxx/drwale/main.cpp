@@ -1,36 +1,52 @@
 #include <algorithm>
+#include <bitset>
+#include <cstring>
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
 constexpr int MAXN = 5e6 + 7;
-int drewno[MAXN], dp[MAXN];
-
-void zmiesc(int n, int pojemnosc) {
-    for (int i = 1; i <= n; i++)
-        for (int w = pojemnosc; w > drewno[i - 1] - 1; w--)
-            dp[w] = max(dp[w], dp[w - drewno[i - 1]] + drewno[i - 1]);
-}
+int drewno[MAXN], wystapienia[2 * MAXN];
+bitset<MAXN> dp;
+vector<int> v;
 
 int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+
     int n, wynik = 0, suma_dlugosci = 0;
-    scanf("%d", &n);
+    cin >> n;
 
     for (int i = 0; i < n; i++) {
-        scanf("%d", &drewno[i]);
+        cin >> drewno[i];
         suma_dlugosci += drewno[i];
+        ++wystapienia[drewno[i]];
     }
 
     sort(drewno, drewno + n);
 
     int najdluzszy = drewno[n - 1];
     drewno[n - 1] = 0;
+    wystapienia[najdluzszy]--;
     --n;
 
     suma_dlugosci -= najdluzszy;
-    int pojemnosc = suma_dlugosci / 2;
 
-    zmiesc(n, pojemnosc);
+    for (int i = 1; i <= suma_dlugosci; ++i) {
+        if (wystapienia[i] > 2) {
+            int tmp = 2 - (wystapienia[i] % 2);
+            wystapienia[2 * i] += (wystapienia[i] - tmp) / 2;
+            wystapienia[i] = tmp;
+        }
+        for (int j = 0; j < wystapienia[i]; ++j) v.push_back(i);
+    }
 
-    printf("%d\n", najdluzszy + dp[pojemnosc]);
+    dp[0] = 1;
+    for (int i : v) dp |= (dp << i);
+
+    for (int i = 0; i <= suma_dlugosci / 2; ++i)
+        if (dp[i]) wynik = i;
+
+    cout << najdluzszy + wynik;
 }
