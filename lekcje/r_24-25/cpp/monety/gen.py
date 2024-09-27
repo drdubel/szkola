@@ -3,9 +3,9 @@ from random import choice, randint
 
 
 def gen():
-    n = randint(3, 1000)
+    n = randint(3, 10000)
     k = randint(2, n)
-    rzuty = "".join(choice("OOOOOOOOOR") for _ in range(n))
+    rzuty = "".join(choice("O" * (n - 1) + "R") for _ in range(n))
 
     return f"{n} {k}\n{rzuty}"
 
