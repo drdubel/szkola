@@ -3,17 +3,17 @@
 using namespace std;
 
 constexpr int MAXN = 2e5 + 7;
-int krulestwa[MAXN];
+long long krulestwa[MAXN];
 
 int main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
 
-    int t;
+    long long t;
     cin >> t;
 
     for (int i = 0; i < t; ++i) {
-        int n, a, b, stolica = 0, koszt_podboju = 0;
+        long long n, a, b, stolica = 0, koszt_podboju = 0;
         cin >> n >> a >> b;
 
         for (int j = 0; j < n; ++j) {
